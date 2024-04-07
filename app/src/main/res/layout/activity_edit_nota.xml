@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"
-            android:text="Adicionar Anotação"
+            android:text="Editar Anotação"
             android:textColor="@color/azul1"
             android:textSize="18sp"
             android:textStyle="bold" />

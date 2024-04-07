@@ -48,10 +48,10 @@ class CadNotaActivity : AppCompatActivity() {
 
                 withContext(Dispatchers.Main){
                     if (mensagem){
-                        Toast.makeText(applicationContext, "Anotação Salva", Toast.LENGTH_LONG).show()
+                        toastCadastrar()
                         finish()
                     }else{
-                        Toast.makeText(applicationContext, "Preencha todos os campos", Toast.LENGTH_LONG).show()
+                        toastErro()
                     }
                 }
             }
@@ -63,5 +63,24 @@ class CadNotaActivity : AppCompatActivity() {
         listaNotas.add(nota)
         notaDao = AppDatabase.getInstance(this).notasDao()
         notaDao.inserir(listaNotas)
+    }
+
+    private fun toastCadastrar(){
+        val inflater = layoutInflater
+        val view = inflater.inflate(R.layout.toast_customizado_cadastrar, findViewById(R.id.container_cadastrar))
+        val toastCadastrar = Toast(this)
+        toastCadastrar.view = view
+        toastCadastrar.duration = Toast.LENGTH_LONG
+        toastCadastrar.show()
+    }
+
+    private fun toastErro() {
+        val inflater = layoutInflater
+        val view =
+            inflater.inflate(R.layout.toast_customizado_erro, findViewById(R.id.container_erro))
+        val toastCadastrar = Toast(this)
+        toastCadastrar.view = view
+        toastCadastrar.duration = Toast.LENGTH_LONG
+        toastCadastrar.show()
     }
 }

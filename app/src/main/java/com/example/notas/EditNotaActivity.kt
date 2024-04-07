@@ -49,10 +49,10 @@ class EditNotaActivity : AppCompatActivity() {
                 }
                 withContext(Dispatchers.Main){
                     if (mensagem){
-                        Toast.makeText(this@EditNotaActivity, "Anotação Ataualizada", Toast.LENGTH_LONG).show()
+                        toastAtualizar()
                         finish()
                     }else{
-                        Toast.makeText(this@EditNotaActivity, "Preencha todos os campos", Toast.LENGTH_LONG).show()
+                        toastErro()
                     }
                 }
             }
@@ -62,5 +62,24 @@ class EditNotaActivity : AppCompatActivity() {
     private fun atualizarNota(uid: Int, titulo: String, anotacao: String){
         notaDao = AppDatabase.getInstance(this).notasDao()
         notaDao.atualizar(uid, titulo, anotacao)
+    }
+
+    private fun toastAtualizar(){
+        val inflater = layoutInflater
+        val view = inflater.inflate(R.layout.toast_customizado_atualizar, findViewById(R.id.container_atualizar))
+        val toastCadastrar = Toast(this)
+        toastCadastrar.view = view
+        toastCadastrar.duration = Toast.LENGTH_LONG
+        toastCadastrar.show()
+    }
+
+    private fun toastErro() {
+        val inflater = layoutInflater
+        val view =
+            inflater.inflate(R.layout.toast_customizado_erro, findViewById(R.id.container_erro))
+        val toastCadastrar = Toast(this)
+        toastCadastrar.view = view
+        toastCadastrar.duration = Toast.LENGTH_LONG
+        toastCadastrar.show()
     }
 }
