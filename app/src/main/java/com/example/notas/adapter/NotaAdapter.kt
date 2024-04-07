@@ -1,14 +1,21 @@
 package com.example.notas.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.notas.AppDatabase
 import com.example.notas.EditNotaActivity
+import com.example.notas.dao.NotaDao
 import com.example.notas.databinding.NotaItemBinding
 import com.example.notas.model.Nota
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NotaAdapter(private val context: Context, private val listaNotas: MutableList<Nota>):
     RecyclerView.Adapter<NotaAdapter.NotaViewHolder>() {
@@ -18,6 +25,7 @@ class NotaAdapter(private val context: Context, private val listaNotas: MutableL
         return NotaViewHolder(itemLista)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: NotaViewHolder, position: Int) {
         holder.txtNotaTitulo.text = listaNotas[position].titulo
         holder.txtNotaAnotacao.text = listaNotas[position].anotacao
@@ -28,6 +36,19 @@ class NotaAdapter(private val context: Context, private val listaNotas: MutableL
             intent.putExtra("anotacao", listaNotas[position].anotacao)
             intent.putExtra("uid", listaNotas[position].uid)
             context.startActivity(intent)
+        }
+
+        holder.btNotaDel.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                val nota = listaNotas[position]
+                val notaDao: NotaDao = AppDatabase.getInstance(context).notasDao()
+                notaDao.deletar(nota.uid)
+                listaNotas.remove(nota)
+
+                withContext(Dispatchers.Main){
+                    notifyDataSetChanged()
+                }
+            }
         }
     }
 

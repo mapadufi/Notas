@@ -18,4 +18,7 @@ interface NotaDao {
             "WHERE uid = :uid")
     fun atualizar(uid: Int, novoTitulo: String, novoAnotacao: String)
 
+    @Query("DELETE FROM tabela_notas WHERE uid = :id")
+    fun deletar(id: Int)
+
 }
