@@ -3,6 +3,7 @@ package com.example.notas
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import com.example.notas.dao.NotaDao
 import com.example.notas.databinding.ActivityEditNotaBinding
@@ -66,7 +67,9 @@ class EditNotaActivity : AppCompatActivity() {
 
     private fun toastAtualizar(){
         val inflater = layoutInflater
-        val view = inflater.inflate(R.layout.toast_customizado_atualizar, findViewById(R.id.container_atualizar))
+        val view = inflater.inflate(R.layout.toast_sucesso, findViewById(R.id.container_sucesso))
+        val textView = view.findViewById<TextView>(R.id.textoSucesso)
+        textView.text = "Atualizado com sucesso"
         val toastCadastrar = Toast(this)
         toastCadastrar.view = view
         toastCadastrar.duration = Toast.LENGTH_LONG

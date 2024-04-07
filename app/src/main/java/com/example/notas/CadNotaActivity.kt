@@ -3,11 +3,11 @@ package com.example.notas
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import com.example.notas.dao.NotaDao
 import com.example.notas.databinding.ActivityCadNotaBinding
 import com.example.notas.model.Nota
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -67,7 +67,9 @@ class CadNotaActivity : AppCompatActivity() {
 
     private fun toastCadastrar(){
         val inflater = layoutInflater
-        val view = inflater.inflate(R.layout.toast_customizado_cadastrar, findViewById(R.id.container_cadastrar))
+        val view = inflater.inflate(R.layout.toast_sucesso, findViewById(R.id.container_sucesso))
+        val textView = view.findViewById<TextView>(R.id.textoSucesso)
+        textView.text = "Cadastrado com sucesso"
         val toastCadastrar = Toast(this)
         toastCadastrar.view = view
         toastCadastrar.duration = Toast.LENGTH_LONG
