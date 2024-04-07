@@ -1,5 +1,6 @@
 package com.example.notas
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -21,6 +22,13 @@ class CadNotaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCadNotaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btCadCan.setOnClickListener {
+            binding.edtCadTitulo.text.clear()
+            binding.edtCadAnotacao.text.clear()
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
 
 
             binding.btCadSal.setOnClickListener{
@@ -55,7 +63,5 @@ class CadNotaActivity : AppCompatActivity() {
         listaNotas.add(nota)
         notaDao = AppDatabase.getInstance(this).notasDao()
         notaDao.inserir(listaNotas)
-
-
     }
 }

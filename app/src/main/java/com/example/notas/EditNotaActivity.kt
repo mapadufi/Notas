@@ -1,5 +1,6 @@
 package com.example.notas
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -18,6 +19,13 @@ class EditNotaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditNotaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btEditCan.setOnClickListener {
+            binding.edtEditTitulo.text.clear()
+            binding.edtEditAnotacao.text.clear()
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
 
         val tituloRecuperado = intent.extras?.getString("titulo")
         val anotacaoRecuperado = intent.extras?.getString("anotacao")
