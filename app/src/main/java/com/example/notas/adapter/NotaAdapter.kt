@@ -1,10 +1,12 @@
 package com.example.notas.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.notas.EditNotaActivity
 import com.example.notas.databinding.NotaItemBinding
 import com.example.notas.model.Nota
 
@@ -19,6 +21,14 @@ class NotaAdapter(private val context: Context, private val listaNotas: MutableL
     override fun onBindViewHolder(holder: NotaViewHolder, position: Int) {
         holder.txtNotaTitulo.text = listaNotas[position].titulo
         holder.txtNotaAnotacao.text = listaNotas[position].anotacao
+
+        holder.btNotaEdit.setOnClickListener{
+            val intent = Intent(context, EditNotaActivity::class.java)
+            intent.putExtra("titulo", listaNotas[position].titulo)
+            intent.putExtra("anotacao", listaNotas[position].anotacao)
+            intent.putExtra("uid", listaNotas[position].uid)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount() = listaNotas.size
