@@ -41,6 +41,7 @@ class CadNotaActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main){
                     if (mensagem){
                         Toast.makeText(applicationContext, "Anotação Salva", Toast.LENGTH_LONG).show()
+                        finish()
                     }else{
                         Toast.makeText(applicationContext, "Preencha todos os campos", Toast.LENGTH_LONG).show()
                     }
